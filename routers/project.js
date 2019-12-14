@@ -27,4 +27,23 @@ router.post("/", (req, res) => {
 		})
 })
 
+// DELETE request to delete a project
+router.delete("/:id", (req, res) => {
+	db.remove(req.params.id)
+		.then(data => {
+            console.log(data)
+			res.status(204).json({
+                message: "project was deleted"
+            })
+		})
+		.catch(err => {
+            console.log(err)
+            res.status(500).json({
+                message: "Couldn't find project by this id"
+            })
+		})
+})
+
+
+
 module.exports = router;
