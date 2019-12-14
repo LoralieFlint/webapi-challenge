@@ -15,19 +15,26 @@ router.get("/", (req, res) => {
 });
 //GET actionss by ID
 router.get("/:id", (req, res) => {
-    db.get(req.params.id)
-      .then(data => {
-        res.json(data);
-      })
-      .catch(err => {
-        next(err);
-      });
-  });
+  db.get(req.params.id)
+    .then(data => {
+      res.json(data);
+    })
+    .catch(err => {
+      next(err);
+    });
+});
 
 // POST a new action for a project by ID
 router.post("/", (req, res) => {
   db.insert(req.body)
     .then(data => res.status(200).json(data))
     .catch(err => res.status(500).json({ message: "Could not create action" }));
+});
+
+// PUT request to update action by ID
+router.put("/:id", (req, res) => {
+  db.update(req.params.id, req.body)
+    .then(data => res.status(200).json(data))
+    .catch(err => res.status(500).json({ message: "Could not update action" }));
 });
 module.exports = router;
