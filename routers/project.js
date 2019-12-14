@@ -41,6 +41,20 @@ router.post("/", (req, res) => {
             })
 		})
 })
+// PUT request to update a project by id
+router.put("/:id", (req, res) => {
+	db.update(req.params.id, req.body)
+		.then(data => {
+            console.log(data)
+			res.json(data)
+		})
+		.catch(err => {
+            console.log(err)
+            res.status(500).json({
+                message: "Couldn't update project with this id"
+            })
+		})
+})
 
 // DELETE request to delete a project
 router.delete("/:id", (req, res) => {
