@@ -3,7 +3,7 @@ play this: https://www.youtube.com/watch?v=d-diB65scQU
 */
 const express = require("express");
 const ProjectRouter = require("./routers/project");
-// const ActionRouter = require("./routers/actions");
+const ActionRouter = require("./routers/actions");
 const helmet = require("helmet");
 
 const server = express();
@@ -14,7 +14,7 @@ const port = 8000;
 server.use(helmet());
 server.use(express.json());
 server.use("/api/projects", ProjectRouter);
-// server.use("/api/actions", ActionRouter);
+server.use("/api/actions", ActionRouter);
 
 server.listen(port, host, () => {
   console.log(`Running at http://${host}:${port}`);
