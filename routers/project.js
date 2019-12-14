@@ -13,6 +13,21 @@ router.get("/", (req, res) => {
 		})
 })
 
+// GET request for actions on specific ID on project
+router.get("/:id/actions", (req, res) => {
+	db.getProjectActions(req.params.id)
+		.then(data => {
+            console.log(data)
+			res.json(data)
+		})
+		.catch(err => {
+            console.log(err)
+            res.status(500).json({
+                message: "Couldn't find project by this id"
+            })
+		})
+})
+
 // POST request to add a new project
 router.post("/", (req, res) => {
 	db.insert(req.body)
@@ -43,7 +58,5 @@ router.delete("/:id", (req, res) => {
             })
 		})
 })
-
-
 
 module.exports = router;
