@@ -13,6 +13,17 @@ router.get("/", (req, res) => {
       res.sendStatus(500);
     });
 });
+//GET actionss by ID
+router.get("/:id", (req, res) => {
+    db.get(req.params.id)
+      .then(data => {
+        res.json(data);
+      })
+      .catch(err => {
+        next(err);
+      });
+  });
+
 // POST a new action for a project by ID
 router.post("/", (req, res) => {
   db.insert(req.body)
